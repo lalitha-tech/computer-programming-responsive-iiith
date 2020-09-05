@@ -251,7 +251,8 @@ body {
 .imageRectangle {
     left: 50%;
     top: 0%;
-    background-image: url('rectangle.jpg');
+    background-size: 80%;
+    background-image: url('right-angle-triangle.png');
     border: 1px dashed black;
 }
 
