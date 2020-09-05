@@ -51,11 +51,17 @@ window.view = {
 		this.addClickEvent('btnOk', function() { view.proceedToStartButton() })
 		this.addClickEvent('btnStart', function() { view.displayElements() })
 		this.addClickEvent('btnNext', function() { view.sortArray() })
+                this.addClickEvent('btnRandom',function() {document.getElementById('userInput').disabled = true })
+		this.addClickEvent('btnManual',function() {document.getElementById('userInput').disabled = false })
 	},
 	proceedToStartButton: function() {
+                
 		var userInput = this.getArraySize()
-		if( isNaN( userInput ) === false ) {
+		var element1 = document.getElementsByName('radio_group')
+                                    if( isNaN( userInput ) === false ) {
+                     
 			if( userInput !== 0 ) {
+                              
 				var element = document.getElementById('inputButtonRadio')
 				element.className = 'show, radioButtonDivision'
 				this.disableButton('btnOk')
@@ -77,6 +83,7 @@ window.view = {
 		}
 	},
 	getUserInput: function() {
+                
 		var inputValue = document.getElementById('userInput').value
 		inputValue = inputValue.replace(/\s/g, ',')
 		this.numbers = inputValue.split(',')
@@ -84,9 +91,18 @@ window.view = {
 	takeInputFromRadioBox: function() {
 		var element = document.getElementsByName('radio_group')
 		if ( element[0].checked )
-			this.generateRandomNumbers()
-		else if (element[1].checked)
-			this.getUserInput()
+			{
+//document.getElementById('userInput').disabled=true;
+                         this.generateRandomNumbers()
+                         this.disableButton('userInput')
+                         }
+		else 
+                     {if (element[1].checked)
+			{ 
+                          
+                          this.getUserInput()
+                         }
+                      }
 	},
 	createBoxes: function() {
 		for ( i = 0 ; i < this.numbers.length ; i++ ) {
