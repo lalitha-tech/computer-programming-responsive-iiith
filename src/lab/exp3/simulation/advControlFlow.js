@@ -165,36 +165,46 @@ window.view = {
     startBtn: function() {
     	this.getInput()
     	this.clearDivs()
+          var flag=0;
     	var selected_loop = this.getSelectedLoop()
 		var inputValue = document.getElementById('simpleLoopInput').value
-		if (selected_loop === 'for' && inputValue !== '' && !isNaN(model.inp) )
-		{
-			this.displayLoop('forLoopContent', 'codeContentFor1')
+		if (selected_loop === 'for' && inputValue !== '' && !isNaN(model.inp))
+		{if(inputValue<1||inputValue>20)
+                    {alert("Invalid Input");flag=1;}
+                  else 
+                  this.displayLoop('forLoopContent', 'codeContentFor1')
 		}
 		if (selected_loop === 'while' && inputValue !== '' && !isNaN(model.inp))
-		{
-			this.displayLoop('whileLoopContent', 'codeContentWhile1')
+		{if(inputValue<1||inputValue>20)
+                    {alert("Invalid Input");flag=1;}
+                  else 
+		   this.displayLoop('whileLoopContent', 'codeContentWhile1')
 		}
 		if (selected_loop === 'do-while' && inputValue !== '' && !isNaN(model.inp))
-		{
-		 	this.displayLoop('dowhileLoopContent', 'codeContentDoWhile1')
+		{if(inputValue<1||inputValue>20)
+                   { alert("Invalid Input");flag=1;}
+                  else 
+		 this.displayLoop('dowhileLoopContent', 'codeContentDoWhile1')
 		}
-		this.disableButton('btnStart')
+		if(flag==0)
+                {this.disableButton('btnStart')
 		this.changeClass( 'btnStart', 'buttonDisable startButton')
 		this.enableButton('btnNext')
 		this.changeClass( 'btnNext', 'button nextButton')
 		this.disableButton('loopList')
 		this.changeClass( 'loopList', 'buttonDisable loopList')
 		this.disableButton('simpleLoopInput')
+                }
 	},
 	updateModelAndShowResult: function() {
-		if( model.inp >= 1)
+		if( model.inp >=1)
 		{	
 			this.disp = model.fact
 			model.computeNextFact()
 			this.resultDisplay(this.disp, model.inp, model.fact)
 			model.inp --
 		}
+
 	},
 	highlightNextStep: function() {
 		this.changeClass(this.lastRedDiv.id, 'showDiv')
@@ -261,7 +271,7 @@ window.view = {
 					this.processSimpleLoopStep('whileLoopHead')
 				if ( this.lastRedDiv.id === 'dowhileLoopTail' )
 					this.processSimpleLoopStep('dowhileLoopHead')
-				if( model.inp < 1 )
+				if( model.inp < 1)
 				{
 					this.endTheSimpleLoopCode()
 		 			this.changeClass(this.nextRedDiv.id, 'showDiv')
